@@ -78,5 +78,17 @@ public class CarController {
         });
     }
 
+    public List<Car> rentedCars() {
 
+        return carService.rentedCars();
+    }
+
+    public List<Car> availableCars() {
+
+        return carService.rentedCars();
+    }
+
+    public Car findRentedCarByCustomer(String email) {
+        return carService.findByCarPlate(email);
+    }
 }

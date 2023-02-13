@@ -3,14 +3,19 @@ package com.erinc;
 import com.erinc.controller.CarController;
 import com.erinc.controller.CustomerController;
 import com.erinc.controller.RentalController;
+import com.erinc.repository.entity.EntityState;
 
 import java.util.Scanner;
 
 public class RentApp {
+    static Scanner scanner = new Scanner(System.in);
+    RentalController rentalController = new RentalController();
+    CarController carController = new CarController();
     public static void main(String[] args) {
 
         int choose;
-        Scanner scanner = new Scanner(System.in);
+
+        RentApp rentApp = new RentApp();
 
         do{
             System.out.println("***********************************");
@@ -37,7 +42,7 @@ public class RentApp {
                     break;
                 case 5: new RentalController().rental();
                     break;
-                case 6:
+                case 6: rentApp.Reports();
                     break;
             }
         }while(choose!=0);
@@ -47,6 +52,40 @@ public class RentApp {
 
 
 
+
+
+
+
+    }
+
+    private void Reports() {
+        scanner = new Scanner(System.in);
+
+        System.out.println("***********************************");
+        System.out.println("******      REPORTS       *********");
+        System.out.println("***********************************");
+        System.out.println();
+        System.out.println("1- Rented Cars");
+        System.out.println("2- Available Cars");
+        System.out.println("3- Rented Cars By Customer");
+        System.out.println("0- Exit");
+        System.out.println("Choose Your Report Please");
+        int secim = scanner.nextInt();
+
+        switch (secim){
+            case 1: carController.rentedCars(); // Hocam Hatamı Bulamıyorum.
+                break;
+            case 2: carController.rentedCars();
+                break;
+            case 3: carController.findRentedCarByCustomer();
+                break;
+            case 0:
+                break;
+
+        }
+
+        // Hocam Buralardaki hatalarımı biliyorum
+        // ancak erkan saatlerde yaptığım hataları çöcmeye harcadığım zaman yüyünden yetiştiremedim. Saygılarımla
 
 
 

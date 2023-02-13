@@ -10,6 +10,7 @@ import com.erinc.service.RentalService;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class RentalController {
@@ -25,6 +26,7 @@ public class RentalController {
         customerService = new CustomerService();
         carService = new CarService();
     }
+
 
     public void rental() {
         LocalDateTime now = LocalDateTime.now();
