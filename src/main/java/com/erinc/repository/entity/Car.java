@@ -21,10 +21,8 @@ import javax.persistence.*;
                 query = "SELECT COUNT(c.carPlate)>0 FROM Car c WHERE c.carPlate = :carplate"),
         @NamedQuery(name = "Car.findByCarPlate",
         query = "SELECT c FROM Car c WHERE c.carPlate = :carplate"),
-        @NamedQuery(name = "Car.rentedCars",
-                query = "SELECT c FROM Car c WHERE c.state = :RENTED"),
-        @NamedQuery(name = "Car.findRentedCarByCustomer",
-                query = "SELECT c FROM Car c WHERE c.state = :RENTED ORDER BY c.customerid")
+
+
 
 })
 public class Car extends BaseEntity {
@@ -35,6 +33,8 @@ public class Car extends BaseEntity {
     String carMolder;
     String carColour;
     String carPlate;
+    @Enumerated(EnumType.STRING)
+    CarState carState;
 
 
 }

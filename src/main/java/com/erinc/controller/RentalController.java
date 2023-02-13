@@ -1,9 +1,6 @@
 package com.erinc.controller;
 
-import com.erinc.repository.entity.Car;
-import com.erinc.repository.entity.Customer;
-import com.erinc.repository.entity.EntityState;
-import com.erinc.repository.entity.Rental;
+import com.erinc.repository.entity.*;
 import com.erinc.service.CarService;
 import com.erinc.service.CustomerService;
 import com.erinc.service.RentalService;
@@ -36,15 +33,17 @@ public class RentalController {
         System.out.println("***   RENTAL PAGE  ***");
         System.out.println("**********************");
         System.out.println();
+
         boolean cstate;
         do{
             System.out.println("Type The Plate Whitch You Want To Rent");
             String rentPlate = scanner.nextLine();
-            boolean isCarAvailable = carService.isCarAvailable(rentPlate);
+            boolean isCarAvailable = carService.isCarAvailable2(rentPlate);
             if(isCarAvailable){
+                System.out.println("Car Is Available..");
                 System.out.println("Type Your E-mail Please");
                 String email = scanner.nextLine();
-                System.out.println("Please Set Your Return Date");
+                System.out.println("How Many Days Would You Like?");
                 String duration = scanner.nextLine();
 // MUSTERINI KONTROL ET.
                 Rental rental = Rental.builder()
@@ -60,20 +59,19 @@ public class RentalController {
                 System.out.println("Rental Operation Completed Successfully");
                 Car car =carService.findByCarPlate(rentPlate);
                 System.out.println(car.getId());
-                car.setState(EntityState.RENTED);
+                car.setCarState(CarState.RENTED);
                 carService.update(car);
                 cstate = false;
             }else{
-                System.out.println("This Car Is Not Available For Rent!");
+                System.out.println("This Car Is Not Available!");
                 cstate = true;
             }
         }while(cstate);
 
-
-
-
-
-
-
     }
+    public List<Rental> rentalsByCustomer(String email){
+        return rentalService.rentalsByCustomer(email);
+    }
+
+
 }

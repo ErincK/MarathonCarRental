@@ -3,9 +3,13 @@ package com.erinc;
 import com.erinc.controller.CarController;
 import com.erinc.controller.CustomerController;
 import com.erinc.controller.RentalController;
+import com.erinc.repository.entity.CarState;
 import com.erinc.repository.entity.EntityState;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class RentApp {
     static Scanner scanner = new Scanner(System.in);
@@ -56,6 +60,8 @@ public class RentApp {
 
 
 
+
+
     }
 
     private void Reports() {
@@ -73,19 +79,29 @@ public class RentApp {
         int secim = scanner.nextInt();
 
         switch (secim){
-            case 1: carController.rentedCars(); // Hocam Hatamı Bulamıyorum.
+            case 1: carController.rentedCarList().forEach(System.out::println);
                 break;
-            case 2: carController.rentedCars();
+            case 2: carController.availableCarList().forEach(System.out::println);
                 break;
-            case 3: carController.findRentedCarByCustomer();
+            case 3:
+                System.out.println("Email Please!");
+                String email = scanner.nextLine();
+                rentalController.rentalsByCustomer(email).forEach(System.out::println);
+
+                // Hocam tek noksan burası kaldı.
+                // ReturnType ile ilgili bir hata veriyor ama kör oldum artık, kafamda RAM de şişti :)
+                // Bunu geç yolluyorum malesef, gönül isterdi ki en azından tam yollayayım, O da olmadı.
+                // Sağlık olsun, Saygılarımla... :)
+
+
+
                 break;
             case 0:
                 break;
 
         }
 
-        // Hocam Buralardaki hatalarımı biliyorum
-        // ancak erkan saatlerde yaptığım hataları çöcmeye harcadığım zaman yüyünden yetiştiremedim. Saygılarımla
+
 
 
 

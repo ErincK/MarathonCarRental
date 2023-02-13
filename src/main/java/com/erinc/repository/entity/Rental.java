@@ -13,7 +13,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tblrental")
 @NamedQueries({
-
+        @NamedQuery(name = "Rental.rentalsByCustomer",
+                query = "SELECT r.carPlate FROM Rental r WHERE r.carPlate = :email")
 })
 public class Rental extends BaseEntity{
     @Id

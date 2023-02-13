@@ -1,9 +1,9 @@
 package com.erinc.controller;
 
-import com.erinc.repository.entity.Car;
-import com.erinc.repository.entity.EntityState;
+import com.erinc.repository.entity.*;
 import com.erinc.service.CarService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,19 +35,19 @@ public class CarController {
             System.out.println("Car Plate....: ");
             String carPlate = scanner.nextLine();
             System.out.println("Car State....: ");
-            String state = scanner.nextLine();
+            String carState = scanner.nextLine();
             boolean isCarExist = carService.carexistByPlate(carPlate);
             if(isCarExist){
                 System.out.println("This Car Plate Is Already Exist..!");
                 cstate = true;
             }else {
-                System.out.println(EntityState.valueOf(state));
+                //System.out.println(CarState.valueOf(String.valueOf(CarState.RENTED)));
                 Car car = Car.builder()
                         .carBrand(carBrand)
                         .carMolder(carModel)
                         .carColour(carColour)
                         .carPlate(carPlate)
-                        .state(EntityState.valueOf(state))
+                        .carState(CarState.valueOf(carState))
                         .build();
                 carService.save(car);
                 System.out.println("Car Add Completed Successfully.");
@@ -55,6 +55,9 @@ public class CarController {
             }
         }while(cstate);
     }
+
+
+
 
     public void carSearch() {
         scanner = new Scanner(System.in);
@@ -68,9 +71,9 @@ public class CarController {
         String carPlate = scanner.nextLine();
 
         carService.findAll().forEach(x->{
-            if(x.getState().equals(EntityState.valueOf("RENTED"))){
+            if(x.getCarState().equals(CarState.valueOf("RENTED"))){
                 System.out.println("SORRY, This Car Is Not Available..!");
-            }else if(x.getState().equals(EntityState.valueOf("AVAILABLE"))) {
+            }else if(x.getCarState().equals(CarState.valueOf("AVAILABLE"))) {
                 System.out.println("SORRY, This Car Is Rented..!");
             }else {
                 System.out.println("This Car Is Available");
@@ -78,17 +81,16 @@ public class CarController {
         });
     }
 
-    public List<Car> rentedCars() {
-
-        return carService.rentedCars();
-    }
-
-    public List<Car> availableCars() {
-
-        return carService.rentedCars();
-    }
-
     public Car findRentedCarByCustomer(String email) {
         return carService.findByCarPlate(email);
     }
+    public List<Car> rentedCarList(){
+        return carService.rentedCarList();
+    }
+    public List<Car> availableCarList(){
+        return carService.availableCarList();
+    }
+
+
+
 }
